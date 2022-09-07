@@ -15,6 +15,13 @@ const Converter: React.FC = () => {
   const [toCurrency, setToCurrency] = useState('');
   const [error, setError] = useState<string | null>(null);
 
+  const onInputChangeHandler = (inputPreValue: string) => {
+    const matchedRequiredValue = inputPreValue.match(/^-?\d+\.?\d*$|^\s*$/);
+    if (matchedRequiredValue) {
+      setInputValue(matchedRequiredValue[0]);
+    }
+  };
+
   const {
     fetching: fetchConverions,
     isLoading: isconvertingLoading,
@@ -36,7 +43,7 @@ const Converter: React.FC = () => {
   }, [convertingError]);
 
   useEffect(() => {
-    const amount = +inputValue.replace(',', '.');
+    const amount = +inputValue;
     if (amount && fromCurrency && toCurrency) {
       fetchConverions({ amount, from: fromCurrency, to: toCurrency });
     } else {
@@ -60,7 +67,7 @@ const Converter: React.FC = () => {
       <TextInput
         className={cl.input}
         value={inputValue}
-        onChange={setInputValue}
+        onChange={onInputChangeHandler}
         placeholder="Enter the amount"
       />
       <ConvertConfig {...configToConvert} />
