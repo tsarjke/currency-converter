@@ -1,0 +1,22 @@
+.textInput {
+	min-width: 200px;
+	font-size: 20px;
+	border-radius: 5px;
+	padding: 10px;
+	text-align: center;
+	border: none;
+}
+
+@media (min-width: 576px) {
+	.textInput {
+		min-width: 400px;
+		font-size: 22px;
+		padding: 12px;
+	}
+}
+
+@media (min-width: 768px) {
+	.textInput {
+		font-size: 24px;
+	}
+}
